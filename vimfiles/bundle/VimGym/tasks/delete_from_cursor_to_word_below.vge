@@ -1,0 +1,8 @@
+foo<CR>d`a
+<
+But there's a much better way to do that:
+>
+    d/foo<CR>
+<
+You're going to jump to your practice file and try that out now, aren't you? ;)
+See |setting-up-a-practice-file| if you haven't done so already.

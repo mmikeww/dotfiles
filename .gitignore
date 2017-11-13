@@ -1,0 +1,4 @@
+/vimfiles/backup/
+/vimfiles/swap/
+/vimfiles/bundle/*/doc/tags
+/vimfiles/bundle/VimGym/stats.vimgym

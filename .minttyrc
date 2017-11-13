@@ -1,0 +1,6 @@
+BoldAsFont=-1
+FontHeight=11
+Font=Consolas
+Transparency=off
+OpaqueWhenFocused=no
+Term=xterm-256color

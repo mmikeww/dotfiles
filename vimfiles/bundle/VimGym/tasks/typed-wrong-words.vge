@@ -1,0 +1,19 @@
+
+suppose you are in insert mode and typing away and you realize a few words back that you typed the wrong word
+what is the best way to replace it?
+
+you could control+backspace or Ctrl+w if you have that insert mode mapping, but then you delete all the other subsequent words
+
+you could exit insert mode and then use 'B' to go backwards and then 'cw' to change, but the repeated b's feel slow
+
+you could exit insert mode and then search backwards with ?searchtext and then 'cw'
+
+example: 
+
+I use my middle finger and then my index finger to do the 'er' character combination.
+
+while typing that in insert mode, you get to the word combination             ^
+and realize you want to replace the previous word 'do' with the word 'type'
+
+I use my middle finger and then my index finger to type the 'er' character combination.
+

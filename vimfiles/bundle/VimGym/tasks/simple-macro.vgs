@@ -1,0 +1,19 @@
+learning to use macros 
+https://www.reddit.com/r/vim/comments/5ozz4s/beat_sublime_texts_multiple_cursors_in_500_bytes/dcnv0gg/
+
+change all of the 'int's to 'double's and change all 'poisson' to 'exponential'
+
+use macro:
+
+gg/intqqvecdouble<C-[>3wvecexponential<C-[>0jq8@q
+
+int a = poisson(3).value()
+int a = poisson(3).value()
+int a = poisson(3).value()
+int a = poisson(3).value()
+int a = poisson(3).value()
+int a = poisson(3).value()
+int a = poisson(3).value()
+int a = poisson(3).value()
+int a = poisson(3).value()
+

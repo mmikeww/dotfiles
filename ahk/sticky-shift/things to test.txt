@@ -1,0 +1,38 @@
+Shift, a => A
+Shift + a => A
+Shift, Shift, a => a
+Shift, Shift + a => A
+Shift, wait two sec timeout, a => a
+Shift, Ctrl+a => DOESNT Select All
+Shift, arrow key => Selects char
+Shift, Ctrl+Left => Select prev word
+Shift, Alt+f => File menu
+Shift, Win+d => D
+Shift, Tab => Shift+Tab
+Shift down hold, Capslock down/up, Shift still down + a = a
+Shift, h+e => should not be HE???
+
+
+capslock setting
+
+Shift, Shift = Capslock
+Shift, Shift+Hold down for a while and then release = Capslock
+
+
+
+reset setting
+
+Shift, Shift, new timeout, a = A
+Shift, Shift, new timeout, Shift, new timeout, a = A
+
+
+skip spacebar setting
+
+Shift, Space, a = A
+Shift+Space, a = A
+Shift, Space, Space, Space, a = A
+
+
+
+problems
+Shift, 'he' real fast as chord = HE double shifted chars

@@ -1,0 +1,479 @@
+move to next/previous word
+these are equiv to ctrl+arrows
+w
+b
+
+
+
+instead of esc to exit back to normal mode:
+ctrl+[
+
+
+to search:
+/searchpattern
+
+next result:
+n
+
+
+find next occurance of char on line:
+f
+
+next/prev result:
+; / ,
+
+
+
+http://stackoverflow.com/questions/657447/vim-clear-last-search-highlighting
+clear highlighting:
+:nohlsearch
+:nohl
+:noh
+
+
+first letter of line
+^
+
+first letter of next line
+enter
+
+first char of line
+0
+
+last letter of line
+$
+
+
+
+undo
+u
+
+redo
+ctrl+r     in normal mode. in insert mode it pastes from register
+
+
+
+
+how to comment a bunch of lines:
+http://stackoverflow.com/questions/2561418/how-to-comment-out-a-block-of-python-code-in-vim
+
+ctrl+v              visual block mode
+shift+I             insert mode at start of selection
+type comment char
+esc
+
+
+
+scroll up or down or forward or back a page
+ctrl+u
+ctrl+d
+ctrl+f
+ctrl+b
+
+
+center window around cursor
+zz
+
+		
+
+copy (yank) selected
+y
+yy   yank full line
+
+paste
+p        after cursor
+P        before cursor
+gp/gP    same as p/P but leave cursor after the pasted text
+
+
+change word
+cw
+
+change inside (
+ci(
+cib      b is the same? 'block'?
+
+
+goto line number N
+NG
+
+
+goto matching brace
+%
+
+
+goto next/prev instance of word under cursor
+* / #
+
+
+autocomplete
+ctrl+n in insert mode
+then ctrl+n or ctrl+p to navigate the list
+
+
+indent
+> and <
+>3j      indent here and 3 lines below
+
+indent entire file
+gg=G            = command must do some special shit
+
+
+
+
+
+http://whileimautomaton.net/2008/11/vimm3/operator
+
+Some text objects are similar to some motions, but
+
+You don't need to adjust the cursor
+
+dw - delete from the cursor to the next word (so, to delete a word, you have to move the cursor at the beginnig of the word)
+daw - delete a word regardless of the cursor position
+You'll be able to edit more effectively with text objects
+
+
+
+
+http://takac.github.io/2013/01/30/vim-grammar/
+
+w,W - word OBJECT, not to be confused with the MOVEMENT
+In context this has to be used with the a or i modifiers, just like any other text object, and it will affect the whole word/WORD regardless of cursor placement.
+
+When daw is used and the cursor is in the middle of a word, it affects the whole word and the leading whitespace. This is different and must not be confused with the behaviour of dw which is delete till.. end of movement.
+
+
+
+sentence and paragraph text objects: 
+
+is, ip, ap
+vip, vap
+dip, dap
+
+
+
+how:
+http://stackoverflow.com/a/1218429/312601
+2nd gif
+cursor is at start of line, enters visual mode, yet still selects the text within the '' even though cursor is not within the ''
+
+answer:
+http://stackoverflow.com/questions/14650788/why-ci-and-ci-ci-behave-differently
+
+alternative
+%vi(
+
+
+
+
+autocomplete?
+ctrl+x then ctrl+p
+but is that omni complete?
+http://usevim.com/2012/07/06/vim101-completion/
+http://robots.thoughtbot.com/vim-you-complete-me
+
+complete line:
+ctrl+x, ctrl+L
+
+
+using marks for quick saving of position
+ma         set a mark
+mA
+'a         jump to a mark
+'A
+lower case for use within a file
+upper case for other files
+http://vim.wikia.com/wiki/Using_marks
+
+
+
+get ascii code
+ga
+
+enter ascii or unicode char
+http://vim.wikia.com/wiki/Entering_special_characters
+ctrl+v nnn
+
+
+
+
+consider
+copy a string with yi"
+move to new location and delete inside quotes with di"
+when you try to paste with p you will just put back wht you deleted because the d command also copies
+"one"      "two"       "three"
+solutions:
+1. yanking always copies to the 0 register, so you can paste with "0p
+2. delete without saving to register with "_d
+http://stackoverflow.com/questions/54255/in-vim-is-there-a-way-to-delete-without-putting-text-in-the-register 
+http://stackoverflow.com/questions/3638542/any-way-to-delete-in-vim-without-overwriting-your-last-yank
+http://vimcasts.org/blog/2013/11/registers-the-good-the-bad-and-the-ugly-parts/
+perhaps create a <leader>d mapping to do this
+3. use visual mode to select instead of using d command:   vi"p
+http://vim.wikia.com/wiki/Replace_a_word_with_yanked_text
+i like this (#3) the best. consider the normal usage: select/highlight text, ctrlc, highlight text to replace, ctrlv
+however, the downside is that the text that you paste over is now in the yank buffer, 
+so if you try to repeat by doing vi"p again, you wont be pasting in the original yank.
+BUT, YOU CAN REMAP 'P' IN VISUAL MODE:
+vnoremap p "_dp
+vnoremap P "_dP
+FROM: http://stackoverflow.com/questions/12625722/vim-toggling-buffer-overwrite-behavior-when-deleting/
+4. use ctrlR in insert mode to paste from register 0:   ci"<C-r>0   then repeat with . dot
+but <c-r> is a difficult press and then i need to <c-[> to exit insert mode
+from same wikia link
+maybe map this ci"<C-r>0 command, but i won't always want to use " text obj
+can create an insert mode mapping to auto paste in, maybe ctrl+v?
+inoremap <c-v> <c-r>0
+5. or just use any specific register   :help registers
+http://www.usevim.com/2012/04/13/registers/
+6. use yankring plugin or yankstack, yankstack seems simpler and less intrusive
+yankstack allows me to do vi"p repeatedly . alt+p to cycle
+7. maybe just remap d to "_d directly and forget about it
+this guy does it https://github.com/terryma/dotfiles/blob/master/.vimrc
+and i think he will use visual mode to select and then 'x' command to 'cut'
+8. ReplaceWithRegister plugin - LOOK INTO THIS
+9. set up a freenode acct and ask in IRC #vim
+10. easy clip plugin   https://github.com/svermeulen/vim-easyclip
+11. vim-exhange plugin:  https://github.com/tommcdo/vim-exchange
+
+so i think i will use vi"p with yankstack, and fallback on ci"<c-r>0 if i need to do it repeatedly 
+so that i can use the . dot command.
+
+problem with both vi"p and <c-r>0<c-[> is the two pinky keypresses at the end, its inconvenient
+but in my "hello" "one" "two" example above, i should be using viw and ciw isntead
+
+
+
+
+search and replace:
+http://www.thegeekstuff.com/2009/04/vi-vim-editor-search-and-replace-examples/
+:%s/searchstring/replacestring/gc
+
+also:
+http://www.moolenaar.net/habits.html
+"If only a few locations need changing, a quick method is to use the * command to find the next occurrence of the word and use cw to change the word. Then type n to find the next word and . (dot) to repeat the cw command."
+
+
+
+
+list buffers
+:ls
+jump to buffer with partial name
+:b partialname
+jump to previous used buffer
+<C-6>
+
+need to do a bunch of tests with diw daw diW daW dt(space) etc for when i'm cutting and pasting variables
+and want or dont want the preceeding or trailling spaces
+
+also need to practice jumping within a line by using /searchstring or ?searchstring
+
+
+
+testing one two
+
+http://vimeo.com/53144573
+modes.. already are used to different modes. forex, pressing c and pressing ctrl+c is different
+
+
+hello (asfdafd)
+
+perhaps swap CAPS and ESC with AHK
+
+
+
+http://www.reddit.com/r/vim/comments/267vrv/i_am_tim_pope_crafter_of_plugins_ama/chonns1
+in insert mode, ctrl-p and ctrl-x for word completion
+
+
+
+
+while within a block, these will take you to the matching brace
+[{
+]}
+
+
+append text at the end of a word
+ea / Ea
+or start of the word
+bi / Bi
+these will allow me to surround a word without using surround plugin
+to surround with quotes, i'd need to do:
+bi"<ESC>ea"
+or while insert mode, instead of ESCing out, can use <C-O>
+bi"<C-O>f<space>"
+
+
+use KATAS to practice
+string calc kata 
+
+
+in insert mode, Ctrl+O allows one normal mode command
+so, can navigate to start / end of lines with:
+<C-O>^ or <C-O>I
+<C-O>$ or <C-O>A
+but i guess its just as easy to press <C-[>A
+this page suggests insert mode mappings:
+http://vim.wikia.com/wiki/Quick_command_in_insert_mode
+
+
+
+VimGym
+words_in_parens
+  one way is use bi and ea
+need to practice search and replace
+
+
+
+
+" https://github.com/Valloric/dotfiles/blob/master/vim/vimrc.vim
+" Now we don't have to move our fingers so far when we want to scroll through
+" the command history; also, don't forget the q: command (see :h q: for more
+" info)
+cnoremap <c-j> <down>
+cnoremap <c-k> <up>
+
+
+
+
+
+
+using f,F,t,T in conjuction with operations
+dt,
+ct,
+f,a
+
+same with /search motion
+d/return
+d/^}/e          " delete until the next } at start of line till the end of the search
+v/^}/e
+c/foo
+
+
+
+
+remove 2nd function param with dt)
+so:
+function(one, two)
+becomes
+function(one)
+
+
+
+
+http://www.reddit.com/r/vim/comments/3apwc1/vim_noob_append_5_characters_ahead/csevbqq
+
+There are many ways to move the cursor within a line. I only find myself moving character-wise (5l) in rare circumstances. There are some situations where it makes sense, but usually I want to append to the current word (ea), or after the next comma (f,a), or insert before the last pipe (F|i), or after the previous whitespace character (Bi), or before the word "apple" (/apple<CR>i).
+
+
+
+
+'J' to join lines adding spaces
+'gJ' to join lines without spaces
+see help
+
+^alternatively this does the same thing
+:%s/\n//
+
+
+
+
+gx to open url in default browser
+
+
+
+noremap <leader>y "+y 
+noremap  <leader>p "+p
+Then you can use your os copy and paste easily but still have the power of registers!
+
+
+
+
+surround plugin practice
+ysiw"
+ys$"
+
+
+
+folding
+zo - open fold 
+zc - close fold
+zR - open all folds
+zM - close all
+za - toggle fold
+
+foldmethod = indent
+
+
+
+force very magic regexes by preceeding pattern with \v
+/\vHello \w+
+
+/<ctrl+r/    - press ctrl+r then / to use last pattern
+
+
+
+
+
+http://stackoverflow.com/questions/4781070/how-to-insert-tab-character-when-expandtab-option-is-on-in-vim
+for files that use tabs instead of spaces for indents (yuck)
+i can insert a literal tab with this
+<Ctrl+V><tab>
+
+
+
+
+filter all lines containing or not containing a pattern:
+http://vim.wikia.com/wiki/VimTip227
+
+:g/pattern/d
+:g!/pattern/d
+
+
+
+
+
+https://8thlight.com/blog/jerome-goodrich/2017/01/17/Vim-and-TDD.html
+
+:grep foo
+:cdo %s/foo/bar/g | update
+
+:grep foo will find all instances of foo in your project, and populate them in what is called the quickfix window. :cdo then takes a command to apply to each instance in that window. In our case, the command we want to apply is a global substitution of foo with bar, but it could be anything. After making changes, we want those changes to take effect, so we use | update. Voila! With two quick commands we've managed to rename every instance of a variable or function in our entire project.
+
+
+
+scrolling without moving cursor
+http://stackoverflow.com/questions/3458689/how-to-move-screen-without-moving-cursor-in-vim
+
+
+
+
+remove linebreaks
+http://theletterpsi.blogspot.com/2010/07/tips-for-editing-plain-text-with-vim_19.html
+
+:g/./,/^$/j
+
+
+
+
+command line window
+
+http://vimcasts.org/episodes/refining-search-patterns-with-the-command-line-window/
+
+
+
+
+tcomment plugin
+gcip - comment inner paragraph
+vipgc - same
+gciw - comment a word
+gcc  - comment line
+
+
+
+
+ctrlp plugin
+ctrl+J/K to navigate up down
+Ctrl+T open in new tab
+ctrl+V open in vertical split
+ctrl+X open in horizontal split

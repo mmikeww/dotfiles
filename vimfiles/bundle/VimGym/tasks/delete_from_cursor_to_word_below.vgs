@@ -1,0 +1,14 @@
+Marks are great, but don't fall into the trap of over using your shiny new
+toys for every problem at hand.  Take for example the operation of deleting
+everything from the current cursor to a word you can see a few lines below in
+your document.  Having just learned about marks, it might seem like a good idea
+to do this:
+>
+    ma/foo<CR>d`a
+<
+But there's a much better way to do that:
+>
+    d/foo<CR>
+<
+You're going to jump to your practice file and try that out now, aren't you? ;)
+See |setting-up-a-practice-file| if you haven't done so already.

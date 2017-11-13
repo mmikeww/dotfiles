@@ -1,0 +1,35 @@
+learn to quickly rearrange sentences in a paragraph
+
+suppose you're in insert mode and you've typed this:
+
+Nothing new, sorry. I don't mind you being persistent. Please keep asking when you think of it. I will try to prioritize this feature for you and move it up on the todo list, but I still can't promise a timeframe. 
+
+and you want to put the sentence starting with 'Please' at the end of the paragraph so it looks like this:
+
+Nothing new, sorry. I don't mind you being persistent. I will try to prioritize this feature for you and move it up on the todo list, but I still can't promise a timeframe. Please keep asking when you think of it. 
+
+at the end of insert mode, i could exit and do different things depending on what i wanted to train.
+
+operating on search motions:
+ESC
+?please
+d/i will
+A
+ctrl+r, "
+
+operating on sentence motion:
+ESC
+?please
+d)
+A
+ctrl+r, "
+
+operating on sentence text objects:
+ESC
+?please                    <- really i can search anything or be in any part of the sentence since using 'as' obj
+das
+A
+ctrl+r, "
+
+
+
