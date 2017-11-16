@@ -1,5 +1,7 @@
+
 Shift, a => A
 Shift + a => A
+Shift + aa => AA
 Shift, Shift, a => a
 Shift, Shift + a => A
 Shift, wait two sec timeout, a => a
@@ -9,7 +11,7 @@ Shift, Ctrl+Left => Select prev word
 Shift, Alt+f => File menu
 Shift, Win+d => D
 Shift, Tab => Shift+Tab
-Shift down hold, Capslock down/up, Shift still down + a = a
+Shift down hold, Capslock down/up, Shift still down + a = A
 Shift, h+e => should not be HE???
 
 
@@ -24,6 +26,7 @@ reset setting
 
 Shift, Shift, new timeout, a = A
 Shift, Shift, new timeout, Shift, new timeout, a = A
+
 
 
 skip spacebar setting

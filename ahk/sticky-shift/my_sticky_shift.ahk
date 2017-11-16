@@ -138,7 +138,9 @@ Shift_Down:
    if (show_indicator)
       Gui, Hide
 
-   Send, {%trigger_shift_key% Up}
+   if !(GetKeyState(A_ThisHotkey))
+      Send, {%trigger_shift_key% Up}
+
    waiting_for_input := 0          ; the order of this line could possibly matter, this seems like the best order
    Hotkey, LShift, on
    Hotkey, RShift, on
