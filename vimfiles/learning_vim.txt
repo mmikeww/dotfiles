@@ -140,7 +140,8 @@ http://takac.github.io/2013/01/30/vim-grammar/
 w,W - word OBJECT, not to be confused with the MOVEMENT
 In context this has to be used with the a or i modifiers, just like any other text object, and it will affect the whole word/WORD regardless of cursor placement.
 
-When daw is used and the cursor is in the middle of a word, it affects the whole word and the leading whitespace. This is different and must not be confused with the behaviour of dw which is delete till.. end of movement.
+When daw is used and the cursor is in the middle of a word, it affects the whole word and the leading whitespace. 
+This is different and must not be confused with the behaviour of dw which is delete till.. end of movement.
 
 
 
@@ -251,7 +252,8 @@ http://www.thegeekstuff.com/2009/04/vi-vim-editor-search-and-replace-examples/
 
 also:
 http://www.moolenaar.net/habits.html
-"If only a few locations need changing, a quick method is to use the * command to find the next occurrence of the word and use cw to change the word. Then type n to find the next word and . (dot) to repeat the cw command."
+"If only a few locations need changing, a quick method is to use the * command to find the next occurrence of the word 
+and use cw to change the word. Then type n to find the next word and . (dot) to repeat the cw command."
 
 
 
@@ -363,7 +365,9 @@ function(one)
 
 http://www.reddit.com/r/vim/comments/3apwc1/vim_noob_append_5_characters_ahead/csevbqq
 
-There are many ways to move the cursor within a line. I only find myself moving character-wise (5l) in rare circumstances. There are some situations where it makes sense, but usually I want to append to the current word (ea), or after the next comma (f,a), or insert before the last pipe (F|i), or after the previous whitespace character (Bi), or before the word "apple" (/apple<CR>i).
+There are many ways to move the cursor within a line. I only find myself moving character-wise (5l) in rare circumstances. 
+There are some situations where it makes sense, but usually I want to append to the current word (ea), or after the next comma (f,a), 
+or insert before the last pipe (F|i), or after the previous whitespace character (Bi), or before the word "apple" (/apple<CR>i).
 
 
 
@@ -438,7 +442,11 @@ https://8thlight.com/blog/jerome-goodrich/2017/01/17/Vim-and-TDD.html
 :grep foo
 :cdo %s/foo/bar/g | update
 
-:grep foo will find all instances of foo in your project, and populate them in what is called the quickfix window. :cdo then takes a command to apply to each instance in that window. In our case, the command we want to apply is a global substitution of foo with bar, but it could be anything. After making changes, we want those changes to take effect, so we use | update. Voila! With two quick commands we've managed to rename every instance of a variable or function in our entire project.
+:grep foo will find all instances of foo in your project, and populate them in what is called the quickfix window. 
+:cdo then takes a command to apply to each instance in that window. 
+In our case, the command we want to apply is a global substitution of foo with bar, but it could be anything. 
+After making changes, we want those changes to take effect, so we use | update. Voila! 
+With two quick commands we've managed to rename every instance of a variable or function in our entire project.
 
 
 
@@ -477,3 +485,21 @@ ctrl+J/K to navigate up down
 Ctrl+T open in new tab
 ctrl+V open in vertical split
 ctrl+X open in horizontal split
+
+
+
+http://vimcasts.org/episodes/operating-on-search-matches-using-gn/
+
+
+" select last inserted text
+nnoremap gV `[v`]
+
+
+
+so for all of these tips, i should document use-cases, and potential vimgym exercises, and regularly practice them 
+
+
+
+set nowrapscan so N doesn't wrap around after end of file
+useful when doing a recursive macro which keeps doing N and dont want to wrap around back to start of file
+

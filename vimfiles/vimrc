@@ -13,6 +13,7 @@ syntax enable
 
 set background=dark
 
+let g:netrw_browsex_viewer= "xdg-open"
 
 " in mintty (git bash for windows) only one cursor type was being displayed
 " these fix it
@@ -63,9 +64,12 @@ if has("gui_running")
   if has("gui_gtk2")    " or has('unix')
     set guifont=Inconsolata\ 12
   elseif has("gui_win32")
-    " set guifont=Inconsolata:h13
-    " set guifont=DejaVu\ Sans\ Mono:h12
-    set guifont=Consolas:h11
+    set guifont=Source\ Code\ Pro:h12
+    " set guifont=Consolas:h11
+
+    " directx makes the fonts look smoother and antialiased
+    " also draws glyphs and emojis better
+    set renderoptions=type:directx
   endif
 elseif has("unix")
   colorscheme jellybeans
@@ -299,7 +303,11 @@ set synmaxcol=200
 " see macros/matchit.txt for help
 " runtime macros/matchit.vim
 
+
+
 " mappings ---------------------------------------------
+
+let mapleader = "\<Space>"
 
 " yankstack requires that its mappings be done first so that it doens't
 " overwrite mappings below
@@ -318,9 +326,13 @@ inoremap <up> <C-o>gk
 inoremap <down> <C-o>gj
 
 
+nnoremap gev :e $MYVIMRC<cr>
+nnoremap gsv :source $MYVIMRC<cr>
+
+
 " center the screen after 'finding next' occurence and open folds
-nnoremap n nzzzv
-nnoremap N Nzzzv
+" nnoremap n nzzzv
+" nnoremap N Nzzzv
 
 
 " easier navigation to the start/end of lines
@@ -336,7 +348,8 @@ inoremap <C-U> <C-G>u<C-U>
 inoremap <C-W> <C-G>u<C-W>
 
 " remap CTRL+E to move to end of line
-inoremap <C-E> <End>
+" no, my AHK script has ALT+A/E as home/end, learn that
+" inoremap <C-E> <End>
 
 
 " Make Y behave like C and D
@@ -381,6 +394,10 @@ vnoremap < <gv
 vnoremap > >gv
 
 
+inoremap {<CR> {<CR>}<Esc>O
+inoremap (<CR> (<CR>)<Esc>O
+
+
 " http://vim.wikia.com/wiki/Replace_a_word_with_yanked_text
 " big fuck you to VIM. this is the most annoying thing ever
 " maybe i should do this:
@@ -400,7 +417,7 @@ vnoremap > >gv
 " Only define it when not defined already.
 if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
-		  \ | wincmd p | diffthis
+          \ | wincmd p | diffthis
 endif
 
 
@@ -421,6 +438,14 @@ nnoremap <silent> <leader>cc :call g:ToggleColorColumn()<CR>
 
 " plugin settings ---------------------------
 
+let g:EasyMotion_do_mapping = 0
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_use_upper = 1
+let g:EasyMotion_keys = 'ASDGHKLQWERTYUIOPZXCVBNMFJ'
+map <Leader>s <Plug>(easymotion-bd-f2)
+map <Leader>w <Plug>(easymotion-bd-w)
+map <Leader>t <Plug>(easymotion-bd-t)
+
 
 " turn off indentlines by default
 let g:indentLine_enabled = "0"
@@ -428,6 +453,18 @@ let g:indentLine_enabled = "0"
 nnoremap <leader>il :IndentLinesToggle<CR>
 
 nnoremap <leader>rp :RainbowParenthesesToggleAll<CR>
+
+nnoremap <leader>rl :RainbowLevelsToggle<CR>
+
+let g:rainbow_levels = [
+    \{'ctermfg': 11,  'guifg': '#8197bf'},
+    \{'ctermfg': 121, 'guifg': '#65c254'},
+    \{'ctermfg': 81,  'guifg': '#8fbfdc'},
+    \{'ctermfg': 14,  'guifg': '#c6b6ee'},
+    \{'ctermfg': 13,  'guifg': '#cf6a4c'},
+    \{'ctermfg': 121, 'guifg': '#ffb964'},
+    \{'ctermfg': 7,   'guifg': '#e8e8d3'},
+    \{'ctermfg': 14,  'guifg': '#888888'}]
 
 
 " lightline statusbar settings
