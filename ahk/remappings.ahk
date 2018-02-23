@@ -123,7 +123,7 @@ return            ;// end of auto exec
 
 
 ;// ctrl+w deletes prev word as in vim/emacs/etc
-;// this will override chrome's close tab  shortcut - can use ctrl-f4 instead
+;// this will override chrome's close tab shortcut - can use ctrl-f4 instead
 ;// however these interfere with vim, ctrl+W navigates between windows
 ;// i could do  #IfWinNotActive, ahk_class Vim  but then i'm learning two muscle memories?
 ;// or maybe i should change git bash to use vi mode. but that won't work for normal windows edit boxes

@@ -288,6 +288,9 @@ set showcmd
 " popup completion menu max display 10 items
 set pumheight=10
 
+" dont redraw screen during macros
+set lazyredraw
+
 " auto complete vim commandline
 set wildmenu
 set wildmode=longest,full
@@ -386,7 +389,7 @@ nnoremap <F5> :!start cmd.exe /c "%:p"<CR><CR>
 " http://unix.stackexchange.com/questions/72086/ctrl-s-hang-terminal-emulator
 noremap <C-S> :update<CR>
 vnoremap <C-S> <C-C>:update<CR>
-inoremap <C-S> <ESC>:update<CR>
+inoremap <C-S> <ESC>:update<CR>l
 
 " when using > to indent in visual mode, re-select the previously selected area
 " this allows multiple >>>> indents back to back
