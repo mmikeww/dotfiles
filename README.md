@@ -12,7 +12,7 @@ mklink     .minttyrc  dotfiles\.minttyrc
 ```
 the `.vim` dir is necessary because git for windows mintty shell ships its own version of vim which looks in the unix locations  
 
-then `Win+R` then `shell:startup` and add AHK scripts to startup
+then `Win+R` then `shell:startup` and add shortcuts to the AHK scripts to startup
 
 ## Linux
 clone this repo into $HOME directory  
