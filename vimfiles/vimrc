@@ -69,7 +69,9 @@ if has("gui_running")
 
     " directx makes the fonts look smoother and antialiased
     " also draws glyphs and emojis better
-    set renderoptions=type:directx
+    if has("directx")
+      set renderoptions=type:directx
+    endif
   endif
 elseif has("unix")
   colorscheme jellybeans
@@ -107,7 +109,6 @@ set relativenumber
 " dont auto break lines after a certain number of chars
 " can always check where this value was changed with :verbose set tw?
 set textwidth=0
-
 
 " word wrap long lines
 set wrap
@@ -192,12 +193,12 @@ else
    set backupdir=~/vimfiles/backup
    set directory=~/vimfiles/swap//
 endif
-
 " from :help 'directory'
 "- For Unix and Win32, if a directory ends in two path separators "//"
 "  or "\\", the swap file name will be built from the complete path to
 "  the file with all path separators substituted to percent '%' signs.
 "  This will ensure file name uniqueness in the preserve directory.
+
 
 " Make those folders automatically if they don't already exist.
 if !isdirectory(expand(&backupdir))
@@ -299,7 +300,8 @@ set wildmode=longest,full
 set omnifunc=syntaxcomplete#Complete
 
 " long lines cause vim to slowdown due to syntax highlighting
-set synmaxcol=200
+" can use C-L to redraw if the highlighting gets messed up
+set synmaxcol=300
 
 " allow % motion to jump to matching if/else branches as well
 " not using right now because i would need to define b:matchwords for AHK
@@ -387,6 +389,8 @@ nnoremap <F5> :!start cmd.exe /c "%:p"<CR><CR>
 " Use CTRL-S for saving, also in Insert mode
 " on Linux terminal, CTRL+S hangs the terminal, so a bash setting is required:
 " http://unix.stackexchange.com/questions/72086/ctrl-s-hang-terminal-emulator
+" if putty ssh gets hung from mistakenly pressing CTRL+S, use CTRL+Q to un-hang:
+" https://raamdev.com/2007/recovering-from-ctrls-in-putty/
 noremap <C-S> :update<CR>
 vnoremap <C-S> <C-C>:update<CR>
 inoremap <C-S> <ESC>:update<CR>l
@@ -441,6 +445,8 @@ nnoremap <silent> <leader>cc :call g:ToggleColorColumn()<CR>
 
 " plugin settings ---------------------------
 
+let g:highlightedyank_highlight_duration = 500
+
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_use_upper = 1
@@ -463,8 +469,8 @@ let g:rainbow_levels = [
     \{'ctermfg': 11,  'guifg': '#8197bf'},
     \{'ctermfg': 121, 'guifg': '#65c254'},
     \{'ctermfg': 81,  'guifg': '#8fbfdc'},
-    \{'ctermfg': 14,  'guifg': '#c6b6ee'},
     \{'ctermfg': 13,  'guifg': '#cf6a4c'},
+    \{'ctermfg': 14,  'guifg': '#c6b6ee'},
     \{'ctermfg': 121, 'guifg': '#ffb964'},
     \{'ctermfg': 7,   'guifg': '#e8e8d3'},
     \{'ctermfg': 14,  'guifg': '#888888'}]
