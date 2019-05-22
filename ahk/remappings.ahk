@@ -1,5 +1,5 @@
 ﻿
-;// my keyboard (thinkpad w530), standard qwerty with the remaps listed
+;// my keyboard (thinkpad t480s), standard qwerty with the remaps listed
 
 ;
 ; Legend:
@@ -96,6 +96,8 @@ return            ;// end of auto exec
 
 
 #IfWinActive TypeRacer - ahk_class Chrome_WidgetWin_1
+   ^w::Send, {LShift down}{LShift up}{RShift down}{RShift up}^a{Backspace}
+
    ^1::
    ^2::
    ^3::
@@ -105,25 +107,27 @@ return            ;// end of auto exec
    ^r::
    ^t::
    ^n::
+   ^o::
+   ^j::
+   ^p::
    ^+w::
+   Tab::
    return
 
    ^Backspace::Send, ^a{Backspace}
-
-   ^w::Send, ^a{Backspace}
 #IfWinActive
 
 
 
-;// fix notepad
-#IfWinActive ahk_class Notepad
+;// fix notepad, and windows explorer such as when renaming a file
+#IfWinActive ahk_class Notepad|CabinetWClass
    ^Backspace::Send, ^+{Left}{Backspace}
    ^w::Send, ^+{Left}{Backspace}
 #IfWinActive
 
 
-;// ctrl+w deletes prev word as in vim/emacs/etc
-;// this will override chrome's close tab shortcut - can use ctrl-f4 instead
+;// ctrl+w deletes prev word in all other windows (as in vim/emacs/etc)
+;// this will override chrome's close tab shortcut - can use ctrl+F4 instead
 ;// however these interfere with vim, ctrl+W navigates between windows
 ;// i could do  #IfWinNotActive, ahk_class Vim  but then i'm learning two muscle memories?
 ;// or maybe i should change git bash to use vi mode. but that won't work for normal windows edit boxes
@@ -269,6 +273,7 @@ RAlt & r::Send, {Raw}}
 
 ;// emacs/readline/cmdprompt uses ctrl+A and ctrl+E, but ctrl+A would interfere with 'select all', so ill use alt for these
 ;// vim already has these shortcuts bound to ^ and $
+;// but in vim i have them remapped to H/L, i should choose one and be consistent
 !a::Send, {Home} ; dont remap it directly with !a::Home because then alt remains held down, sending an Alt+Home keypress
 !+a::Send, +{Home}
 !e::Send, {End}

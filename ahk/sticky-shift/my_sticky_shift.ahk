@@ -106,7 +106,8 @@ Shift_Down:
    if InStr(A_ThisHotkey, "Shift")
       trigger_shift_key := A_ThisHotkey        ; needs to be set because A_ThisHotkey gets overwritten by the Up hotkey
    else
-      trigger_shift_key := "LShift"
+      trigger_shift_key := "LShift"      ; in case we used something like thumb Alts as the Sticky Shift hotkey
+
    waiting_for_input := 1
 
    if (show_indicator)

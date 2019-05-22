@@ -1,9 +1,8 @@
 # Installation
 
 ## Windows
-clone this repo into %USERPROFILE% directory  
-on Windows that would be into `C:\Users\USERNAME\dotfiles\`  
-then create the symlinks from admin basic cmd prompt (not powershell):  
+clone this repo into %USERPROFILE% directory (into `C:\Users\USERNAME\dotfiles\`)  
+then create these symlinks from admin basic cmd prompt (not powershell):  
 ```
 cd C:\Users\USERNAME
 mklink /D  vimfiles\  dotfiles\vimfiles\
