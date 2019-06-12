@@ -70,6 +70,8 @@ if has("gui_running")
     " directx makes the fonts look smoother and antialiased
     " also draws glyphs and emojis better
     if has("directx")
+      " this is VERY slow on my win7 VM, so don't use this there
+      " but works good on my host win10
       set renderoptions=type:directx
     endif
   endif
@@ -77,6 +79,11 @@ elseif has("unix")
   colorscheme jellybeans
 endif
 
+
+" turn off modelines
+" https://github.com/numirias/security/blob/master/doc/2019-06-04_ace-vim-neovim.md
+set modelines=0
+set nomodeline
 
 " auto indent from the previous line
 set autoindent
