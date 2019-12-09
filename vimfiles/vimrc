@@ -70,7 +70,7 @@ if has("gui_running")
     " directx makes the fonts look smoother and antialiased
     " also draws glyphs and emojis better
     if has("directx")
-      " this is VERY slow on my win7 VM, so don't use this there
+      " this is VERY slow on my VMs both win7 and win10, so don't use this there
       " but works good on my host win10
       set renderoptions=type:directx
     endif
