@@ -485,9 +485,12 @@ let g:rainbow_levels = [
 
 " lightline statusbar settings
 " don't show certain settings when window width is too narrow
-
+" lineinfo truncates from the right as well
 let g:lightline = {
       \ 'colorscheme': 'wombat',
+      \ 'component': {
+      \   'lineinfo': '%3l:%-2v%<',
+      \ },
       \ 'component_function': {
       \   'fileformat': 'MyFileformat',
       \   'filetype': 'MyFiletype',
@@ -504,7 +507,26 @@ function! MyFiletype()
 endfunction
 
 function! MyFileencoding()
-  return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+  " if file encoding is utf-8, display whether or not the file has a BOM
+  if winwidth(0) > 70
+    if strlen(&fenc)
+      if &fenc ==# "utf-8"
+        if exists("+bomb") && &bomb
+          return &fenc . " BOM"
+        else
+          return &fenc
+        endif
+      else
+         return &fenc
+      endif
+    else
+      return &enc
+    endif
+  else
+    return ''
+  endif
+
+" return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
 endfunction
 
 
