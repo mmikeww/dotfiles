@@ -151,31 +151,39 @@ return            ;// end of auto exec
 ;// launch vim to edit things like in webbrowser text boxes or emails
 ;// also have a hotkey where it doesn't select-all when pasting back
 #b::    ; pastes back at the top (emails etc)
-#v::    ; pastes over everything
+#c::    ; pastes over everything
    prev_active_win := WinExist("A")
    fname := TEMP_DIR . "\tmp_vim.txt"
-   saved_clipboard := ClipboardAll
-   Clipboard := ""
-   ;MsgBox, %A_CaretX%  %A_CaretY%
-   Send, ^a
-   Send, ^c
-   ClipWait
-   Clipboard = %Clipboard%   ; Convert any copied files, HTML, or other formatted text to plain text
    FileDelete, %fname%
-   FileAppend, %Clipboard%, %fname%, UTF-8
-   Clipboard := ""
-   SetTimer, ActivateVim, -500    ; incase vim isn't being brought to the top. maybe because of Win+ hotkey?
+   saved_clipboard := ClipboardAll
+   if (A_ThisHotkey = "#c")
+   {
+      Clipboard := ""
+      ;MsgBox, %A_CaretX%  %A_CaretY%
+      Send, ^a
+      Send, ^c
+      ClipWait
+      Clipboard = %Clipboard%   ; Convert any copied files, HTML, or other formatted text to plain text
+      FileAppend, %Clipboard%, %fname%, UTF-8
+   }
+   else
+      FileAppend, % "The contents of this file will be pasted at the top of the previous textbox`n", %fname%, UTF-8
+   SetTimer, ActivateVim, -1000    ; incase vim isn't being brought to the top. maybe because of Win+ hotkey?
    FileGetTime, ftime_pre, %fname%, M
    RunWait, C:\Program Files (x86)\Vim\vim80\gvim.exe %fname% ;,, Max
    FileGetTime, ftime_post, %fname%, M
    if (ftime_pre == ftime_post)    ; dont paste back if no changes
+   {
+      Clipboard := saved_clipboard
       return
+   }
+   Clipboard := ""
    FileRead, Clipboard, %fname%
    Clipboard := RegExReplace(Clipboard, "`r`n$", "") ; remove ending new line because FileRead adds one
    WinActivate, ahk_id %prev_active_win%
    WinWaitActive, ahk_id %prev_active_win%
-   if (A_ThisHotkey = "#v")
-      Send, ^a                           ; use #v to paste over existing text
+   if (A_ThisHotkey = "#c")
+      Send, ^a                           ; use #c to paste over existing text
    else if (A_ThisHotkey = "#b")
       Send, ^{home}                     ; use #b to paste at top, as in email replys
    Send, ^v
