@@ -275,9 +275,8 @@ autocmd BufWinEnter * normal zR
 " but this messes up some plugins? and vim seems to allow / for windows dirs
 " set shellslash
 
-" show tab and trailing whitespace
-"set listchars=tab:>~,trail:·
-set listchars=tab:>~
+" show tab and trailing whitespace and other hidden chars like nbsp ' '
+set listchars=tab:>~,trail:·,nbsp:_,extends:<,precedes:>
 set list
 
 " display trailing whitespace as a highlighted error only after some text
