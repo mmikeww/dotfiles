@@ -70,9 +70,11 @@ if has("gui_running")
     " directx makes the fonts look smoother and antialiased
     " also draws glyphs and emojis better
     if has("directx")
-      " this is VERY slow on my VMs both win7 and win10, so don't use this there
+      " this is VERY slow on my VM on vbox win7, so don't use this there
+      " even on hyper-v win10 VM its slow, and dynamic memory alloc maxes out
+      " renmode:3 doesn't help
       " but works good on my host win10
-      set renderoptions=type:directx
+      " set renderoptions=type:directx
     endif
   endif
 elseif has("unix")
@@ -409,6 +411,12 @@ vnoremap > >gv
 
 inoremap {<CR> {<CR>}<Esc>O
 inoremap (<CR> (<CR>)<Esc>O
+
+
+" https://stackoverflow.com/questions/4312664/is-there-a-vim-command-to-select-pasted-text
+" indent the block that was just pasted
+nnoremap <leader>[ `[V`]<
+nnoremap <leader>] `[V`]>
 
 
 " http://vim.wikia.com/wiki/Replace_a_word_with_yanked_text
