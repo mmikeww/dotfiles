@@ -54,7 +54,16 @@ let g:jellybeans_overrides = {
 \              'ctermfg': 'Green', 'ctermbg': '',
 \              'attr': '' },
 \    'LineNR': { 'guifg': '4d4848' },
+\    'DiffAdd': { 'guifg': '', 'guibg': '2B5B77',
+\              'ctermfg': 'White', 'ctermbg': 'DarkBlue',
+\              'attr': '' },
+\    'DiffDelete': { 'guifg': '', 'guibg': '2B5B77',
+\              'ctermfg': 'White', 'ctermbg': 'DarkBlue',
+\              'attr': '' },
 \}
+" diff colorscheme
+" https://stackoverflow.com/questions/2019281/load-different-colorscheme-when-using-vimdiff
+" matched the colors above from DiffChange in jellybeans.vim
 
 " set gui size and font
 if has("gui_running")
