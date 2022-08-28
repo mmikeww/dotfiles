@@ -441,6 +441,19 @@ nnoremap <leader>] `[V`]>
 " really i should just use visual mode to paste over
 
 
+" https://superuser.com/questions/404333/how-do-i-only-dp-or-do-just-the-lines-not-the-entire-block-in-vim-diff
+" `do` and `dp` get and put the diff from the whole block
+" these maps allow you to get and put an individual line
+nnoremap <silent> <leader>dp V:diffput<cr>
+nnoremap <silent> <leader>dg V:diffget<cr>
+" undo the diff done in the other window
+nmap <silent> <leader>du :wincmd w<cr>:normal u<cr>:wincmd w<cr>
+" easier diff next/ diff back
+" i hate using [ and ] keys
+nnoremap <leader>dn ]c
+nnoremap <leader>db [c
+
+
 " from vimrc_example.vim, see also :help :DiffOrig
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the unsaved changes you made.
