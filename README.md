@@ -8,6 +8,7 @@ cd C:\Users\USERNAME
 mklink /D  vimfiles\  dotfiles\vimfiles\
 mklink /D  .vim\      dotfiles\vimfiles\
 mklink     .minttyrc  dotfiles\.minttyrc
+mklink     .gitconfig  dotfiles\.gitconfig
 ```
 the `.vim` dir is necessary because git for windows mintty shell ships its own version of vim which looks in the unix locations  
 

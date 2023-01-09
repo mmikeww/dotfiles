@@ -1,0 +1,19 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+#	name = unknown
+#	email = mmikeww@users.noreply.github.com
+
+[diff]
+ 	tool = gvimdiff
+[difftool]
+ 	prompt = false
+[difftool "gvimdiff"]
+ 	path = "C:/tools/vim/vim82/gvim.exe"
+
+[merge]
+ 	tool = gvimdiff
+	conflictStyle = diff3
+[mergetool "gvimdiff"]
+ 	path = "C:/tools/vim/vim82/gvim.exe"
+
