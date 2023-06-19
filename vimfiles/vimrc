@@ -287,8 +287,17 @@ autocmd BufWinEnter * normal zR
 " set shellslash
 
 " show tab and trailing whitespace and other hidden chars like nbsp ' '
+" also use these settings in a toggle func below
 set listchars=tab:>~,trail:·,nbsp:_,extends:<,precedes:>
 set list
+
+" if a file does not have a trailing EOL char at the end
+" Vim normally adds it when you save. this setting turns that off
+" so that the existing eol or no eol is retained from when file is first read
+set nofixeol
+
+" display the number of search results in the statusbar
+set shortmess-=S
 
 " display trailing whitespace as a highlighted error only after some text
 " the 'trail' listchar matches lines with only whitespace
@@ -475,8 +484,30 @@ function! g:ToggleColorColumn()
     setlocal colorcolumn=81
   endif
 endfunction
- 
+
 nnoremap <silent> <leader>cc :call g:ToggleColorColumn()<CR>
+
+
+" toggle visible newlines
+" https://learnvimscriptthehardway.stevelosh.com/chapters/38.html
+" https://stackoverflow.com/questions/3860519/see-line-breaks-and-carriage-returns-in-editor
+" if i dont want vim to write the ending newline, use `:set nofixeol` before saving
+let g:newlines_visible = 0
+
+function! g:ToggleNewlines()
+    if g:newlines_visible
+        set listchars=tab:>~,trail:·,nbsp:_,extends:<,precedes:>
+        edit
+        let g:newlines_visible = 0
+    else
+        set listchars=tab:>~,trail:·,nbsp:_,extends:<,precedes:>,eol:$
+        edit ++ff=unix
+        let g:newlines_visible = 1
+    endif
+endfunction
+
+nnoremap <silent> <leader>nl :call g:ToggleNewlines()<CR>
+
 
 
 " plugin settings ---------------------------
