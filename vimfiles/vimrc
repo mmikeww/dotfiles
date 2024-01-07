@@ -53,6 +53,9 @@ let g:jellybeans_overrides = {
 \    'Special': { 'guifg': '8abeb7', 'guibg': '',
 \              'ctermfg': 'Green', 'ctermbg': '',
 \              'attr': '' },
+\    'SpecialKey': { 'guifg': '444444', 'guibg': '292929',
+\              'ctermfg': 'Green', 'ctermbg': '',
+\              'attr': '' },
 \    'LineNR': { 'guifg': '4d4848' },
 \    'DiffAdd': { 'guifg': '', 'guibg': '2B5B77',
 \              'ctermfg': 'White', 'ctermbg': 'DarkBlue',
@@ -99,8 +102,8 @@ set nomodeline
 " auto indent from the previous line
 set autoindent
 
-" set tabs = 8 spaces
-set tabstop=8
+" set tabs = 4 spaces
+set tabstop=4
 
 " indentation is 3 spaces
 set shiftwidth=3
@@ -288,8 +291,10 @@ autocmd BufWinEnter * normal zR
 
 " show tab and trailing whitespace and other hidden chars like nbsp ' '
 " also use these settings in a toggle func below
-set listchars=tab:>~,trail:·,nbsp:_,extends:<,precedes:>
+set listchars=tab:>\ ,trail:•,nbsp:‡,extends:<,precedes:>
 set list
+" or to highlight trailing spaces
+" match ErrorMsg '\s\+$'
 
 " if a file does not have a trailing EOL char at the end
 " Vim normally adds it when you save. this setting turns that off
@@ -525,6 +530,10 @@ map <Leader>t <Plug>(easymotion-bd-t)
 
 " turn off indentlines by default
 let g:indentLine_enabled = "0"
+" turn off concealing in json and markdown files so that shit doesnt
+" get hidden while indentLine uses the vim conceal feature
+let g:vim_json_conceal=0
+let g:markdown_syntax_conceal=0
 
 nnoremap <leader>il :IndentLinesToggle<CR>
 
@@ -641,7 +650,7 @@ fun! CompleteMonths(findstart, base)
          let final_list += [{
                   \ 'word': i,
                   \ 'info': i.':::'.all_values[i],
-                  \ 'menu': all_values[i], 
+                  \ 'menu': all_values[i],
                   \ 'kind': 'month',
                   \ }]
       endfor

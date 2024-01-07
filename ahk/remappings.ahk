@@ -95,8 +95,8 @@ return            ;// end of auto exec
 
 
 
-#IfWinActive TypeRacer - ahk_class Chrome_WidgetWin_1
-   ^w::Send, {LShift down}{LShift up}{RShift down}{RShift up}^a{Backspace}
+#IfWinActive ^TypeRacer - ahk_class Chrome_WidgetWin_1
+   ^w::Send, +{Home}{Backspace}
 
    ^1::
    ^2::
@@ -111,7 +111,7 @@ return            ;// end of auto exec
    ^j::
    ^p::
    ^+w::
-   Tab::
+   ;Tab::
    return
 
    ^Backspace::Send, ^a{Backspace}
