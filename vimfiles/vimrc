@@ -261,6 +261,9 @@ autocmd BufReadPost *
 set splitbelow
 set splitright
 
+" automatically resize splits so they are equal when vim is resized
+autocmd VimResized * wincmd =
+
 " show some padding lines when scrolling with <c-f> <c-b> or jk
 set scrolloff=2
 
