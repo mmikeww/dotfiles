@@ -531,6 +531,13 @@ map <Leader>w <Plug>(easymotion-bd-w)
 map <Leader>t <Plug>(easymotion-bd-t)
 
 
+" we want to match the C style goto labels again
+" undo this: https://github.com/wellle/context.vim/pull/129/files
+let g:context_skip_regex = '^\([<=>]\{7\}\|\s*\($\|#\|//\|/\*\|\*\($\|\s\|/\)\)\)'
+" then add the label regex to the end of this
+let g:context_extend_regex = '^\s*\([]{})]\|end\|else\|\(case\|default\|done\|elif\|fi\)\>\|\w\+:$\)'
+
+
 " turn off indentlines by default
 let g:indentLine_enabled = "0"
 " turn off concealing in json and markdown files so that shit doesnt
